@@ -84,13 +84,13 @@ group_filter:
   filter_HK: &filter_HK
     filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong)'
   filter_TW: &filter_TW
-    filter: "(?i)(🇹🇼|台湾|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)"
+    filter: "(?i)(🇹🇼|台湾|台灣|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)"
   filter_JP: &filter_JP
-    filter: "(?i)(🇯🇵|日本|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)"
+    filter: "(?i)(🇯🇵|日本|东京|東京|大阪|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)"
   filter_SG: &filter_SG
-    filter: "(?i)(🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)"
+    filter: "(?i)(🇸🇬|新加坡|狮城|獅城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)"
   filter_US: &filter_US
-    filter: '(?i)(🇺🇸|美国|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states)'
+    filter: '(?i)(🇺🇸|美国|美國|洛杉矶|洛杉磯|纽约|紐約|西雅图|(?<![A-Za-z])USA?(?![A-Za-z])|united\s*states|america)'
 
 # DNS 统一锚点
 dns_common:
@@ -277,7 +277,6 @@ proxy-groups:
   # 台湾节点
   - name: "TWN-Auto"
     <<: [*auto, *auto_exclude, *filter_TW]
-    include-all: true
   - name: "Taiwan"
     <<: [*manual, *manual_exclude, *filter_TW]
     proxies: ["TWN-Auto"]
@@ -347,7 +346,7 @@ rule-providers:
   hbo: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/hbo.mrs", path: "./ruleset/hbo.mrs", path-in-bundle: "geo/geosite/hbo.mrs" }
   disney: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/disney.mrs", path: "./ruleset/disney.mrs", path-in-bundle: "geo/geosite/disney.mrs" }
   emby: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-emby.mrs", path: "./ruleset/emby.mrs", path-in-bundle: "geo/geosite/category-emby.mrs" }
-  emos: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/binaryu/emos-proxy-rule@main/rules/emos-mihomo.mrs", path: "./ruleset/emos.mrs", path-in-bundle: "geo/geosite/category-emby.mrs" }
+  emos: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/binaryu/emos-proxy-rule@main/rules/emos-mihomo.mrs", path: "./ruleset/emos.mrs" }
   youtube: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/youtube.mrs", path: "./ruleset/youtube.mrs", path-in-bundle: "geo/geosite/youtube.mrs" }
   twitch: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/twitch.mrs", path: "./ruleset/twitch.mrs", path-in-bundle: "geo/geosite/twitch.mrs" }
   category_porn: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-porn.mrs", path: "./ruleset/category_porn.mrs", path-in-bundle: "geo/geosite/category-porn.mrs" }
@@ -366,7 +365,7 @@ rule-providers:
 
   # 自用
   fakeip_filter: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/fakeip-filter.mrs", path: "./ruleset/fakeip-filter.mrs", path-in-bundle: "geo/geosite/fakeip-filter.mrs" }
-  connectivity_check: { <<: *rule_providers_domain, format: mrs, url: "https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/connectivity-check.mrs", path: "./ruleset/connectivity-check.mrs", path-in-bundle: "geo/geosite/connectivity-check.mrs" }
+  connectivity_check: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/connectivity-check.mrs", path: "./ruleset/connectivity-check.mrs", path-in-bundle: "geo/geosite/connectivity-check.mrs" }
   category-ads-all: { <<: *rule_providers_domain, format: mrs, url: "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-ads-all.mrs", path: "./ruleset/category-ads-all.mrs", path-in-bundle: "geo/geosite/category-ads-all.mrs" }
   AWAvenue-Ads-Rule: { <<: *rule_providers_domain, format: mrs, url: "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs", path: "./ruleset/AWAvenue-Ads-Rule.mrs" }
   anime: { <<: *rule_providers_classical, format: yaml, url: "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/rules/anime.yaml", path: "./ruleset/anime.yaml" }

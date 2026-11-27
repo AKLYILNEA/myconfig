@@ -143,7 +143,7 @@ const autoOption = {
   "empty-fallback": "REJECT",
   "exclude-type": "DIRECT|REJECT|Hysteria2",
   "url": "http://g.cn/generate_204",
-  "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Auto.svg"
+  "icon": `${ICON_BASE}common/Auto.svg`
 };
 const manualOption = {
   "include-all": true,
@@ -156,34 +156,35 @@ const manualOption = {
 };
 const autoExclude = "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|直连|下载|(?<!\\d)0\\.[0-5]|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))";
 const manualExclude = "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))";
+const homeFilter = "(?i)(🏠|🏡|家庭|家宽|住宅|HOME|ISP|HINET|HKT)";
 
 // 保留 YAML 的业务组、拦截开关与家宽组，地区组运行时生成。
 const baseOption = {"interval": 1200, "timeout": 3000, "type": "select", "empty-fallback": "REJECT", "url": "http://g.cn/generate_204"};
 const businessOption = { ...baseOption, proxies: ["Default", "Direct", "All Proxies", "Residential", "Hong Kong", "Taiwan", "Japan", "Singapore", "United States"] };
 
 const groupTemplates = [
-  { ...baseOption, "name": "GLOBAL", "proxies": ["Default", "Direct", "WebRTC", "QUIC", "AdBlock", "FCM", "Google", "AI", "GitHub", "Telegram", "Twitter", "TikTok", "Anime", "Media", "Final", "All Proxies", "ALL-Auto", "Residential", "RSD-Auto", "Hong Kong", "HKG-Auto", "Taiwan", "TWN-Auto", "Japan", "JPN-Auto", "Singapore", "SGP-Auto", "United States", "USA-Auto"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Global.svg" },
-  { ...baseOption, "name": "Default", "proxies": ["All Proxies", "Residential", "Hong Kong", "Taiwan", "Japan", "Singapore", "United States"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Proxy.svg" },
-  { ...baseOption, "name": "Direct", "proxies": ["🇨🇳 直连 | 双栈"], "hidden": true, "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Direct.svg" },
-  { ...baseOption, "name": "WebRTC", "proxies": ["Reject", "Pass"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/WebRTC.svg" },
-  { ...baseOption, "name": "QUIC", "proxies": ["Reject", "Pass"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Quic.svg" },
-  { ...baseOption, "name": "AdBlock", "proxies": ["Reject", "Pass"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/AdBlock.svg" },
-  { ...baseOption, "name": "Reject", "proxies": ["REJECT"], "hidden": true, "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Reject.svg" },
-  { ...baseOption, "name": "Pass", "proxies": ["PASS"], "hidden": true, "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Static.svg" },
-  { ...businessOption, "name": "FCM", "default-selected": "Direct", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/FCM.svg" },
-  { ...businessOption, "name": "Google", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Google.svg" },
-  { ...businessOption, "name": "AI", "default-selected": "Residential", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/ChatGPT.svg" },
-  { ...businessOption, "name": "GitHub", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/GitHub.svg" },
-  { ...businessOption, "name": "Telegram", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Telegram.svg" },
-  { ...businessOption, "name": "Twitter", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Twitter.svg" },
-  { ...businessOption, "name": "TikTok", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/TikTok.svg" },
-  { ...businessOption, "name": "Anime", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Bahamut.svg" },
-  { ...businessOption, "name": "Media", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Media.svg" },
-  { ...businessOption, "name": "Final", "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Final.svg" },
-  { ...autoOption, "exclude-filter": "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|直连|下载|(?<!\\d)0\\.[0-5]|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))", "name": "ALL-Auto" },
-  { ...manualOption, "exclude-filter": "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))", "name": "All Proxies", "proxies": ["ALL-Auto"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Available.svg" },
-  { ...autoOption, "filter": "(?i)(🏠|🏡|家庭|家宽|住宅|HOME|ISP|HINET|HKT)", "exclude-filter": "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|直连|下载|(?<!\\d)0\\.[0-5]|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))", "name": "RSD-Auto" },
-  { ...manualOption, "filter": "(?i)(🏠|🏡|家庭|家宽|住宅|HOME|ISP|HINET|HKT)", "exclude-filter": "(?i)(vpn|卖|版本|泄露|剩余|到期|过期|重置|流量|套餐|订阅|官网|网址|网站|客服|工单|群组|频道|通知|超时|备用|(?:https?:\\/\\/|\\.com|\\.org|\\.net|@|⚠️))", "name": "Residential", "proxies": ["RSD-Auto"], "icon": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/icon/svg/common/Home.svg" },
+  { ...baseOption, "name": "GLOBAL", "proxies": ["Default", "Direct", "WebRTC", "QUIC", "AdBlock", "FCM", "Google", "AI", "GitHub", "Telegram", "Twitter", "TikTok", "Anime", "Media", "Final", "All Proxies", "ALL-Auto", "Residential", "RSD-Auto", "Hong Kong", "HKG-Auto", "Taiwan", "TWN-Auto", "Japan", "JPN-Auto", "Singapore", "SGP-Auto", "United States", "USA-Auto"], "icon": `${ICON_BASE}common/Global.svg` },
+  { ...baseOption, "name": "Default", "proxies": ["All Proxies", "Residential", "Hong Kong", "Taiwan", "Japan", "Singapore", "United States"], "icon": `${ICON_BASE}common/Proxy.svg` },
+  { ...baseOption, "name": "Direct", "proxies": ["🇨🇳 直连 | 双栈"], "hidden": true, "icon": `${ICON_BASE}common/Direct.svg` },
+  { ...baseOption, "name": "WebRTC", "proxies": ["Reject", "Pass"], "icon": `${ICON_BASE}common/WebRTC.svg` },
+  { ...baseOption, "name": "QUIC", "proxies": ["Reject", "Pass"], "icon": `${ICON_BASE}common/Quic.svg` },
+  { ...baseOption, "name": "AdBlock", "proxies": ["Reject", "Pass"], "icon": `${ICON_BASE}common/AdBlock.svg` },
+  { ...baseOption, "name": "Reject", "proxies": ["REJECT"], "hidden": true, "icon": `${ICON_BASE}common/Reject.svg` },
+  { ...baseOption, "name": "Pass", "proxies": ["PASS"], "hidden": true, "icon": `${ICON_BASE}common/Static.svg` },
+  { ...businessOption, "name": "FCM", "default-selected": "Direct", "icon": `${ICON_BASE}common/FCM.svg` },
+  { ...businessOption, "name": "Google", "icon": `${ICON_BASE}common/Google.svg` },
+  { ...businessOption, "name": "AI", "default-selected": "Residential", "icon": `${ICON_BASE}common/ChatGPT.svg` },
+  { ...businessOption, "name": "GitHub", "icon": `${ICON_BASE}common/GitHub.svg` },
+  { ...businessOption, "name": "Telegram", "icon": `${ICON_BASE}common/Telegram.svg` },
+  { ...businessOption, "name": "Twitter", "icon": `${ICON_BASE}common/Twitter.svg` },
+  { ...businessOption, "name": "TikTok", "icon": `${ICON_BASE}common/TikTok.svg` },
+  { ...businessOption, "name": "Anime", "icon": `${ICON_BASE}common/Bahamut.svg` },
+  { ...businessOption, "name": "Media", "icon": `${ICON_BASE}common/Media.svg` },
+  { ...businessOption, "name": "Final", "icon": `${ICON_BASE}common/Final.svg` },
+  { ...autoOption, "exclude-filter": autoExclude, "name": "ALL-Auto" },
+  { ...manualOption, "exclude-filter": manualExclude, "name": "All Proxies", "proxies": ["ALL-Auto"], "icon": `${ICON_BASE}common/Available.svg` },
+  { ...autoOption, "filter": homeFilter, "exclude-filter": autoExclude, "name": "RSD-Auto" },
+  { ...manualOption, "filter": homeFilter, "exclude-filter": manualExclude, "name": "Residential", "proxies": ["RSD-Auto"], "icon": `${ICON_BASE}common/Home.svg` },
 ];
 
 const ruleProviders = {
@@ -211,7 +212,7 @@ const ruleProviders = {
   "hbo": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/hbo.mrs", "path": "./ruleset/hbo.mrs", "path-in-bundle": "geo/geosite/hbo.mrs"},
   "disney": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/disney.mrs", "path": "./ruleset/disney.mrs", "path-in-bundle": "geo/geosite/disney.mrs"},
   "emby": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-emby.mrs", "path": "./ruleset/emby.mrs", "path-in-bundle": "geo/geosite/category-emby.mrs"},
-  "emos": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/binaryu/emos-proxy-rule@main/rules/emos-mihomo.mrs", "path": "./ruleset/emos.mrs", "path-in-bundle": "geo/geosite/category-emby.mrs"},
+  "emos": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/binaryu/emos-proxy-rule@main/rules/emos-mihomo.mrs", "path": "./ruleset/emos.mrs"},
   "youtube": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/youtube.mrs", "path": "./ruleset/youtube.mrs", "path-in-bundle": "geo/geosite/youtube.mrs"},
   "twitch": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/twitch.mrs", "path": "./ruleset/twitch.mrs", "path-in-bundle": "geo/geosite/twitch.mrs"},
   "category_porn": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-porn.mrs", "path": "./ruleset/category_porn.mrs", "path-in-bundle": "geo/geosite/category-porn.mrs"},
@@ -226,7 +227,7 @@ const ruleProviders = {
   "nvidia_cn": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/nvidia@cn.mrs", "path": "./ruleset/nvidia@cn.mrs", "path-in-bundle": "geo/geosite/nvidia@cn.mrs"},
   "douyin": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/douyin.mrs", "path": "./ruleset/douyin.mrs", "path-in-bundle": "geo/geosite/douyin.mrs"},
   "fakeip_filter": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/fakeip-filter.mrs", "path": "./ruleset/fakeip-filter.mrs", "path-in-bundle": "geo/geosite/fakeip-filter.mrs"},
-  "connectivity_check": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/connectivity-check.mrs", "path": "./ruleset/connectivity-check.mrs", "path-in-bundle": "geo/geosite/connectivity-check.mrs"},
+  "connectivity_check": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/connectivity-check.mrs", "path": "./ruleset/connectivity-check.mrs", "path-in-bundle": "geo/geosite/connectivity-check.mrs"},
   "category-ads-all": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://fastly.jsdelivr.net/gh/appshubcc/bett-rules@meta/geo/geosite/category-ads-all.mrs", "path": "./ruleset/category-ads-all.mrs", "path-in-bundle": "geo/geosite/category-ads-all.mrs"},
   "AWAvenue-Ads-Rule": {"type": "http", "interval": 86400, "behavior": "domain", "format": "mrs", "url": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs", "path": "./ruleset/AWAvenue-Ads-Rule.mrs"},
   "anime": {"type": "http", "interval": 86400, "behavior": "classical", "format": "yaml", "url": "https://fastly.jsdelivr.net/gh/AKLYILNEA/myconfig@main/rules/anime.yaml", "path": "./ruleset/anime.yaml"},
